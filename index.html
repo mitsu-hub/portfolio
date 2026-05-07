@@ -3,142 +3,479 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mitsutaka Uehara | Portfolio</title>
-  <link rel="stylesheet" href="../style.css">
+  <title>Projects | Mitsutaka Uehara</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+
+    .page-header-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-header-eyebrow a {
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .page-header-eyebrow a:hover {
+      color: var(--blue-2);
+    }
+
+    .page-header h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      font-weight: 300;
+      max-width: 480px;
+    }
+
+    /* ── DESIGN DECISIONS ── */
+    .decisions-section {
+      margin-bottom: 5rem;
+    }
+
+    .decisions-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .decision-item {
+      background: var(--navy-2);
+      padding: 1.25rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.6;
+      position: relative;
+      padding-left: 2.25rem;
+    }
+
+    .decision-item::before {
+      content: '';
+      position: absolute;
+      left: 1.25rem;
+      top: 1.55rem;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--blue-2);
+    }
+
+    /* ── PROJECT ENTRIES ── */
+    .project-entry {
+      margin-bottom: 4rem;
+      scroll-margin-top: 80px;
+    }
+
+    .proj-entry-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .proj-entry-title {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .proj-entry-meta {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .proj-entry-num {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy-3);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .proj-entry-body {
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .proj-entry-intro {
+      padding: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proj-entry-intro p {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .proj-highlights {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proj-highlights-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .highlights-list li {
+      font-size: 0.87rem;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.6;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .highlights-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-3);
+      font-family: var(--font-mono);
+    }
+
+    .proj-footer {
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .proj-footer-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .proj-footer-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      align-self: center;
+      margin-right: 0.25rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3.5rem 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      header {
+        padding: 1.25rem 1.25rem;
+      }
+      main {
+        padding: 3rem 1.25rem 5rem;
+      }
+      .proj-entry-header {
+        grid-template-columns: 1fr;
+      }
+      .proj-entry-num {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>Portfolio</h1>
-  <p>Projects & Technical Skills</p>
+  <div class="header-logo">MU<span>.</span>dev</div>
+  <nav>
+    <a href="/">home</a>
+    <a href="/portfolio/" class="active">projects</a>
+    <a href="Mitsutaka_Uehara_resume.pdf" target="_blank">resume</a>
+  </nav>
 </header>
 
 <main>
 
-  <h2>Design Decisions</h2>
-<ul>
-  <li>Selected a static site architecture using GitHub Pages for simplicity, security, and reliability</li>
-  <li>Implemented a multi-page structure to separate overview and detailed project content</li>
-  <li>Centralized styling to maintain consistency and reduce maintenance effort</li>
-  <li>Used a Git-based workflow to manage updates and ensure version control</li>
-</ul>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-eyebrow">
+      <a href="/">← home</a>
+      <span>/</span>
+      <span>projects</span>
+    </div>
+    <h1>Projects</h1>
+    <p>Academic research, student-led deployments, and hands-on security training.</p>
+  </div>
 
+  <!-- DESIGN DECISIONS -->
+  <section class="decisions-section">
+    <div class="section-header">
+      <h2>Design Decisions</h2>
+    </div>
+    <div class="decisions-list">
+      <div class="decision-item">Static site architecture via GitHub Pages for simplicity, security, and reliability</div>
+      <div class="decision-item">Multi-page structure to separate overview and detailed project content</div>
+      <div class="decision-item">Centralized styling for consistency and reduced maintenance overhead</div>
+      <div class="decision-item">Git-based workflow for versioned, reviewable updates</div>
+    </div>
+  </section>
 
-<h2>Projects</h2>
+  <!-- PROJECT 01 -->
+  <article class="project-entry" id="idps">
+    <div class="proj-entry-header">
+      <div>
+        <div class="proj-entry-title">ML-Based Intrusion Detection & Prevention Evaluation</div>
+        <div class="proj-entry-meta">Kanto Gakuin University &nbsp;·&nbsp; Sep 2022 – Mar 2024</div>
+      </div>
+      <div class="proj-entry-num">01</div>
+    </div>
+    <div class="proj-entry-body">
+      <div class="proj-entry-intro">
+        <p>
+          A two-year research effort that fundamentally shaped my approach to cybersecurity.
+          Driven by a strong interest in IDPS, I implemented and evaluated multiple machine
+          learning algorithms against the CICIDS2017 dataset to understand how ML can address
+          real-world network security challenges — and where it falls short.
+        </p>
+      </div>
+      <div class="proj-highlights">
+        <div class="proj-highlights-label">Key Contributions</div>
+        <ul class="highlights-list">
+          <li>Implemented four ML algorithms: SVM, Naive Bayes, Decision Tree, and k-Nearest Neighbors</li>
+          <li>Conducted binary classification experiments using precision and recall as primary metrics</li>
+          <li>Developed ~10 Python source files, each exceeding 1,000 lines of code</li>
+          <li>Identified gaps between theoretical performance and real-world false positive rates on normal traffic</li>
+          <li>Iteratively refined experiments through continuous trial and error over two academic years</li>
+          <li>Gained a realistic perspective on operational IDPS deployment challenges</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-footer-tech">
+          <span class="proj-footer-label">Stack</span>
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">CICIDS2017</span>
+          <span class="tag">Network Security</span>
+          <span class="tag">Intrusion Detection</span>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<h3>Japanese Student Association (JSA) Official Website</h3>
-<p><em>Edmonds College | Nov 2025 – Present</em></p>
-<p>
-This project was my first experience building a website and holds strong personal significance. The Japanese Student Association previously relied primarily on social media for communication, which made it difficult for new students to find reliable and organized information.
+  <hr class="divider">
 
-To address this issue, I designed and developed an official website to serve as a centralized and accessible information hub for the organization.
-</p>
-<ul>
-  <li>Designed the overall site structure with a strong focus on clarity, readability, and ease of navigation</li>
-  <li>Created a layout that allows users to quickly access event information and organizational updates</li>
-  <li>Improved the accessibility of official information by providing a stable platform beyond social media</li>
-  <li>Took responsibility for delivering a site suitable for publication as an official college-affiliated resource</li>
-</ul>
+  <!-- PROJECT 02 -->
+  <article class="project-entry" id="jsa">
+    <div class="proj-entry-header">
+      <div>
+        <div class="proj-entry-title">Japanese Student Association Official Website</div>
+        <div class="proj-entry-meta">Edmonds College &nbsp;·&nbsp; Nov 2025 – Present</div>
+      </div>
+      <div class="proj-entry-num">02</div>
+    </div>
+    <div class="proj-entry-body">
+      <div class="proj-entry-intro">
+        <p>
+          My first experience building a website — and a project with real stakes.
+          The JSA previously relied on social media, making it difficult for new students
+          to find organized information. I designed and deployed an official site to serve
+          as a stable, centralized hub for the organization.
+        </p>
+      </div>
+      <div class="proj-highlights">
+        <div class="proj-highlights-label">Key Contributions</div>
+        <ul class="highlights-list">
+          <li>Designed overall site structure with a strong focus on clarity and ease of navigation</li>
+          <li>Created a layout enabling quick access to event info and organizational updates</li>
+          <li>Improved information accessibility beyond fragmented social media channels</li>
+          <li>Delivered a site appropriate for publication as an official college-affiliated resource</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-footer-tech">
+          <span class="proj-footer-label">Stack</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Google Sheets API</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<p>
-Through this project, I strengthened both my technical skills and my ability to evaluate my work from an objective, user-focused perspective. 
-  Publishing a website associated with the college reinforced a strong sense of responsibility and professionalism, marking an important milestone in my growth as a developer.
-<p> 
-<p><strong>Technologies:</strong> HTML, GUI, Google Sheets API</p>
+  <hr class="divider">
 
-<hr>
+  <!-- PROJECT 03 -->
+  <article class="project-entry" id="portfolio">
+    <div class="proj-entry-header">
+      <div>
+        <div class="proj-entry-title">Personal Web Portfolio & GitHub Pages Deployment</div>
+        <div class="proj-entry-meta">Personal Project &nbsp;·&nbsp; Dec 2025 – Present</div>
+      </div>
+      <div class="proj-entry-num">03</div>
+    </div>
+    <div class="proj-entry-body">
+      <div class="proj-entry-intro">
+        <p>
+          Designed and deployed a personal portfolio to professionally showcase projects,
+          technical skills, and academic experience. Structured to function as a central hub
+          linking a resume, portfolio content, and future projects — built for long-term
+          scalability.
+        </p>
+      </div>
+      <div class="proj-highlights">
+        <div class="proj-highlights-label">Key Contributions</div>
+        <ul class="highlights-list">
+          <li>Designed a multi-page architecture separating landing, portfolio, and resume content</li>
+          <li>Deployed and maintained a static site with a clean, professional layout</li>
+          <li>Implemented consistent styling and navigation for a unified experience</li>
+          <li>Structured for future expansion with additional projects and external links</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-footer-tech">
+          <span class="proj-footer-label">Stack</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">GitHub Pages</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </article>
 
-  <h3>Personal Web Portfolio & GitHub Pages Deployment</h3>
-<p><em>Personal Project | Dec 2025 – Present</em></p>
-<p>
-Designed and deployed a personal web portfolio using GitHub Pages to professionally showcase projects, technical skills, and academic experience.
-The site was structured to function as a central hub linking a resume, portfolio content, and future projects.
-</p>
+  <hr class="divider">
 
-<ul>
-  <li>Designed a multi-page site architecture separating landing, portfolio, and resume content for clarity and scalability</li>
-  <li>Deployed and maintained a static website using GitHub Pages with a clean, professional layout</li>
-  <li>Implemented consistent styling and navigation to ensure a unified user experience across multiple sections</li>
-  <li>Structured content to support future expansion, including additional projects and external links</li>
-</ul>
+  <!-- PROJECT 04 -->
+  <article class="project-entry" id="malware">
+    <div class="proj-entry-header">
+      <div>
+        <div class="proj-entry-title">Cybersecurity Mini Camp – Malware Analysis</div>
+        <div class="proj-entry-meta">Kanto Gakuin University &nbsp;·&nbsp; May 2023</div>
+      </div>
+      <div class="proj-entry-num">04</div>
+    </div>
+    <div class="proj-entry-body">
+      <div class="proj-entry-intro">
+        <p>
+          An intensive cybersecurity training program focused on malware analysis and
+          dynamic behavior monitoring. Gained hands-on experience executing samples in
+          controlled environments and documenting findings.
+        </p>
+      </div>
+      <div class="proj-highlights">
+        <div class="proj-highlights-label">Key Contributions</div>
+        <ul class="highlights-list">
+          <li>Executed malware samples in sandboxed environments and analyzed behavioral patterns</li>
+          <li>Practiced secure handling and analysis procedures for live malware</li>
+          <li>Produced technical reports summarizing attack vectors and countermeasures</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-footer-tech">
+          <span class="proj-footer-label">Stack</span>
+          <span class="tag">Malware Analysis</span>
+          <span class="tag">Sandbox Environments</span>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<p><strong>Technologies:</strong> HTML, CSS, GitHub Pages, Git</p>
+  <hr class="divider">
 
-<hr>
+  <!-- PROJECT 05 -->
+  <article class="project-entry" id="ccna">
+    <div class="proj-entry-header">
+      <div>
+        <div class="proj-entry-title">Networking & Security Labs (CCNA Coursework)</div>
+        <div class="proj-entry-meta">Academic Coursework</div>
+      </div>
+      <div class="proj-entry-num">05</div>
+    </div>
+    <div class="proj-entry-body">
+      <div class="proj-entry-intro">
+        <p>
+          Hands-on networking labs focused on routing, switching, subnetting, basic
+          firewall configuration, and network troubleshooting — all in simulated
+          industry-standard environments.
+        </p>
+      </div>
+      <div class="proj-highlights">
+        <div class="proj-highlights-label">Key Contributions</div>
+        <ul class="highlights-list">
+          <li>Configured routing and switching scenarios using Cisco Packet Tracer</li>
+          <li>Performed subnetting and network troubleshooting exercises</li>
+          <li>Applied foundational network security best practices</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-footer-tech">
+          <span class="proj-footer-label">Stack</span>
+          <span class="tag">Cisco Packet Tracer</span>
+          <span class="tag">TCP/IP</span>
+          <span class="tag">Routing & Switching</span>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<h3>Machine Learning–Based Intrusion Detection & Prevention System Evaluation</h3>
-<p><em>Kanto Gakuin University | Sep 2022 – Mar 2024</em></p>
-<p>
-This project represents a two-year research effort that significantly shaped my interest in cybersecurity and my long-term career goals. Driven by a strong interest in Intrusion Detection and Prevention Systems (IDPS), 
-I conducted an in-depth study to understand how machine learning can be applied to real-world network security challenges.
-
-Using the CICIDS2017 dataset, I implemented and evaluated multiple machine learning algorithms to analyze their effectiveness in detecting malicious network traffic. 
-Through this process, I moved from a surface-level understanding of IDPS concepts to a deep, practical understanding of both their capabilities and limitations.
-</p>
-<ul>
-  <li>Implemented and evaluated four machine learning algorithms: 
-    Support Vector Machine (SVM), Naive Bayes, Decision Tree, and k-Nearest Neighbors</li>
-  <li>Conducted binary classification experiments focusing on detection accuracy using precision and recall as primary evaluation metrics</li>
-  <li>Developed extensive Python-based implementations, writing approximately 10 source files with over 1,000 lines of code each</li>
-  <li>Identified gaps between theoretical expectations and real-world model performance, particularly in false positives for normal traffic</li>
-  <li>Iteratively refined experiments through continuous trial and error, dedicating significant time to research and experimentation</li>
-</ul>
-
-<p>
-Through this research, I gained a realistic perspective on the challenges of deploying machine learning–based security systems in operational environments.
-The experience fundamentally changed how I view cybersecurity, shifting my focus toward detection accuracy, operational impact, and analyst usability.
-
-This project directly influenced my aspiration to pursue a future role in a Security Operations Center (SOC), where accurate detection and informed decision-making are critical.
-<p>
-  
-<p><strong>Technologies:</strong> Machine Learning, Intrusion Detection, Python, CICIDS2017, Network Security</p>
-
-<hr>
-
-<h3>Cybersecurity Mini Camp – Malware Analysis</h3>
-<p><em>Kanto Gakuin University | May 2023</em></p>
-<p>
-Completed an intensive cybersecurity training program focused on malware analysis and dynamic behavior monitoring.
-</p>
-<ul>
-  <li>Executed malware samples in sandboxed environments and analyzed behavioral patterns</li>
-  <li>Practiced secure handling and analysis procedures</li>
-  <li>Produced technical reports summarizing attack vectors and countermeasures</li>
-</ul>
-<p><strong>Technologies:</strong> Malware Analysis, Sandbox Environments</p>
-
-<hr>
-
-<h3>Networking & Security Labs (CCNA Coursework)</h3>
-<p><em>Academic Coursework</em></p>
-<p>
-Completed hands-on networking labs focused on routing, switching, subnetting, basic firewall configuration, and network troubleshooting in simulated environments.
-</p>
-<ul>
-  <li>Configured routing and switching scenarios using industry-standard tools</li>
-  <li>Performed subnetting and network troubleshooting exercises</li>
-  <li>Applied foundational network security best practices</li>
-</ul>
-<p><strong>Technologies:</strong> Cisco Packet Tracer, TCP/IP, Routing & Switching</p>
-
-<h2>Skills</h2>
-
-<ul>
-  <li><strong>Networking:</strong> TCP/IP, Subnetting, Routing & Switching (CCNA-level)</li>
-  <li><strong>Systems:</strong> Linux fundamentals, user & permission management, basic system hardening</li>
-  <li><strong>Web:</strong> HTML, CSS, static site deployment with GitHub Pages</li>
-  <li><strong>Cybersecurity:</strong> Intrusion detection concepts, malware analysis fundamentals</li>
-  <li><strong>Tools:</strong> Git, GitHub, Cisco Packet Tracer, VirtualBox</li>
-</ul>
-
-<p>
-  <a href="/">← Back to Home</a>
-</p>
+  <div style="margin-top: 4rem;">
+    <a href="/" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-3); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s;" onmouseover="this.style.color='var(--blue-2)'" onmouseout="this.style.color='var(--text-3)'">← back to home</a>
+  </div>
 
 </main>
 
 <footer>
-  <p>© 2025 Mitsu</p>
+  <p>© 2025 Mitsutaka Uehara &nbsp;·&nbsp; English &amp; 日本語</p>
 </footer>
 
 </body>
